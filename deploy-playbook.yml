@@ -1,0 +1,29 @@
+- name: A playbook to do deployment things
+  hosts: localhost
+  user: ubuntu
+  become: no
+
+  tasks:
+  - name: 1. Start minikube
+    shell:
+      cmd: minikube start
+
+  - name: 2. Deploy docker image to kubernetes
+    shell:
+      cmd: kubectl create deployment coursework2 --image=fasteddie830/coursework2:latest
+    ignore_errors: yes
+
+  - name: 3. Expose deployment on port 8080
+    shell:
+      cmd: kubectl expose deployment/coursework2 --type="NodePort" --port 8080 --name node-port-service
+    ignore_errors: yes
+
+
+  - name: 4. Something something NODEPORT
+    shell:
+      cmd: curl $(minikube ip):30978
+
+  - name: 5. Upscale Deployments
+    shell:
+      cmd:  kubectl scale deployments/coursework2 --replicas=4
+

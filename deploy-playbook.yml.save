@@ -1,0 +1,28 @@
+- name: A playbook to do deployment things
+  hosts: localhost
+  user: ubuntu
+  become: no
+
+  tasks:
+  - name: 1. Start minikube
+    shell:
+      cmd: minikube start
+
+  - name: 2. Deploy docker image to kubernetes
+    shell:
+      cmd: kubectl create deployment coursework2 --image=fasteddie830/coursework2:latest
+- name: A playbook to do deployment things
+  hosts: localhost
+  user: ubuntu
+  become: no
+
+  tasks:
+  - name: 1. Start minikube
+    shell:
+      cmd: minikube start
+
+  - name: 2. Deploy docker image to kubernetes
+    shell:
+      cmd: kubectl create deployment coursework2 --image=fasteddie830/coursework2:latest
+    ignore_errors:yes
+
