@@ -1,39 +1,41 @@
-node {
-    def app
-    stage('Clone repository') {
-        checkout scm
-    }
-    stage('Build image') {
-        /* The building of Ro… The coursework 2 image */
-        app = docker.build("fasteddie830/coursework2")
-    }
-    stage('Test image') {
-      /* * Testing */
-        app.inside {
-            sh 'echo "Tests passed"'
+pipeline {
+    agent any
+    stages{
+        stage('Clone repository') {
+            checkout scm
         }
-    }
-    stage('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+        stage('Build image') {
+            /* The building of Ro… The coursework 2 image */
+            app = docker.build("fasteddie830/coursework2")
         }
-    }
-    stage('Deploy to K8s') {
-        steps{
-        sshagent(['k8s-jenkins'])
-        {
-        sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'
-        script{
-            try{
-                sh 'ssh ubuntu@172.17.0.2 echo "hello"'
-            }catch(error){
-                    }
+        stage('Test image') {
+          /* * Testing */
+            app.inside {
+                sh 'echo "Tests passed"'
             }
+        }
+        stage('Push image') {
+            /* Finally, we'll push the image with two tags:
+             * First, the incremental build number from Jenkins
+             * Second, the 'latest' tag.
+             * Pushing multiple tags is cheap, as all the layers are reused. */
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
+            }
+        }
+        stage('Deploy to K8s') {
+            steps{
+            sshagent(['k8s-jenkins'])
+            {
+            sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'
+            script{
+                try{
+                    sh 'ssh ubuntu@172.17.0.2 echo "hello"'
+                }catch(error){
+                        }
+                }
+                }
             }
         }
     }
