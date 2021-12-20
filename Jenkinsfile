@@ -23,7 +23,7 @@ node {
             app.push("latest")
         }
     }
-    stage('My own testing'){
+        stage('My own testing') {
         sh 'kubectl get deployments'
     }
 }
