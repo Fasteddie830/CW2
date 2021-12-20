@@ -10,7 +10,7 @@ pipeline {
         stage('Build image') {
             /* The building of Ro… The coursework 2 image */
             steps{
-                app = docker.build("fasteddie830/coursework2")
+                sh 'docker build -t ("fasteddie830/coursework2")'
             }
            
         }
