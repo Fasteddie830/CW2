@@ -1,5 +1,4 @@
 node {
-	agent any
     def app
     stage('Clone repository') {
         checkout scm
@@ -25,11 +24,13 @@ node {
         }
     }
 		stage ('Deploy') {
-		script{
-			def image_id = registry + ":$BUILD_NUMBER"
-			sh 'ansible-playbook task3e-playbook.yml --extra-vars \"image_id=${image_id}\"'
-               }	
-		}
+           steps {
+               script{
+                   def image_id = registry + ":$BUILD_NUMBER"
+                   sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
+           }
+       }
+   }
 }
 	
 
