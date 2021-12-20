@@ -1,7 +1,6 @@
 node {
     def app
-stages{
-stage('Clone repository') {
+    stage('Clone repository') {
         checkout scm
     }
     stage('Build image') {
@@ -15,20 +14,14 @@ stage('Clone repository') {
         }
     }
     stage('Push image') {
-        /* comment would go here. I won't put one here.  */
+        /* Finally, we'll push the image with two tags:
+         * First, the incremental build number from Jenkins
+         * Second, the 'latest' tag.
+         * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
     }
-stage ('Deploy') {
-           steps {
-               script{
-                   def image_id = registry + ":$BUILD_NUMBER"
-                   sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
-           }
-       }
-   }
 }
-}
-	
+
