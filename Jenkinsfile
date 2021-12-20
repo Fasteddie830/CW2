@@ -23,5 +23,18 @@ node {
             app.push("latest")
         }
     }
+    stage('Deploy to K8s') {
+        steps{
+        sshagent(['k8s-jenkins'])
+        {
+        sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'
+        script{
+            try{
+                sh 'ssh ubuntu@172.17.0.2 echo "hello"'
+            }catch(error){
+                    }
+            }
+            }
+        }
+    }
 }
-
