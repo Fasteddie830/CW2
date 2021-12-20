@@ -13,5 +13,7 @@ node {
             sh 'echo "Tests passed"'
         }
     }
+    stage('trying kube') {
+        sh 'kubectl get deployments'
+    }
 }
-
