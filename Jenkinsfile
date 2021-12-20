@@ -10,7 +10,7 @@ pipeline {
         stage('Build image') {
             /* The building of Ro… The coursework 2 image */
             steps{
-            app = docker.build("fasteddie830/coursework2")
+                app = docker.build("fasteddie830/coursework2")
             }
            
         }
@@ -26,9 +26,12 @@ pipeline {
         }
         stage('Push image') {
             steps{
-                docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                script{
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
+                
+                    }
                 }  
             }
         }
@@ -48,3 +51,4 @@ pipeline {
         }
     }
 }
+
