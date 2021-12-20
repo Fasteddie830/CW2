@@ -23,5 +23,12 @@ node {
             app.push("latest")
         }
     }
+		stage ('Deploy') {
+		script{
+			def image_id = registry + ":$BUILD_NUMBER"
+			sh 'ansible-playbook task3e-playbook.yml --extra-vars \"image_id=${image_id}\"'
+               }	
+		}
+}
+	
 
-	}
