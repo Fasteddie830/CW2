@@ -38,17 +38,16 @@ pipeline {
             }
         }
         stage('Deploy to K8s') {
-        sshagent (credentials: ['Ubuntu']) 
             steps{
-            script{
-                try{
-                    sh 'ssh -t -t StrictHostKeyChecking=no ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
-                    sh 'echo hello'
-                }catch(error){
-                        }
+            sshagent (credentials: ['Ubuntu']) 
+                script{
+                    try{
+                        sh 'ssh -t -t StrictHostKeyChecking=no ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
+                        sh 'echo hello'
+                    }catch(error){
+                            }
                 }
             }
         }
     }
 }
-
