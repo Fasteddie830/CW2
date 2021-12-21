@@ -42,7 +42,7 @@ pipeline {
             sshagent(credentials: ['Ubuntu']) {
                 script{
                     try{
-                        sh 'ssh ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
+                        sh 'ssh-keyscan -H ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com >> ~/.ssh/known_hosts'
                     }catch(error){
                             }
                     }
