@@ -43,8 +43,7 @@ pipeline {
             {
             script{
                 try{
-                    sh 'scp -r -o StrictHostKeyChecking=no ubuntu@192.168.49.2
-'
+                    sh 'scp -r -o StrictHostKeyChecking=no ubuntu@192.168.49.2'
                     sh 'echo hello'
                 }catch(error){
                         }
