@@ -39,7 +39,6 @@ pipeline {
         }
         stage('Deploy to K8s') {
             steps{
-            {
             script{
                 try{
                     sh 'ssh ubuntu@100.26.35.33'
