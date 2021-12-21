@@ -42,7 +42,7 @@ pipeline {
             sshagent(credentials: ['Ubuntu']) {
                 script{
                     try{
-                        sh 'ssh-keygen'
+                        sh 'ssh-keygen -q -t rsa -N '' -f Key1 <<<y >/dev/null 2>&1 && cat Key1'
                         /*sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'*/
                         /*sh 'ssh-keyscan -H ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com >> ~/.ssh/known_hosts'*/
                         /*sh 'ssh -t -t ec2-100-26-35-33.compute-1.amazonaws.com'*/
@@ -54,4 +54,3 @@ pipeline {
         }
     }
 }
-
