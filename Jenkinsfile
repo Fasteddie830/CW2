@@ -41,7 +41,7 @@ pipeline {
             steps{
             script{
                 try{
-                    sh 'ssh ubuntu@100.26.35.33'
+                    sh 'ssh -t -t ubuntu@100.26.35.33'
                     sh 'echo hello'
                 }catch(error){
                         }
@@ -50,3 +50,4 @@ pipeline {
         }
     }
 }
+
