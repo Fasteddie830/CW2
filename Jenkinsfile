@@ -38,16 +38,14 @@ pipeline {
             }
         }
         stage('Deploy to K8s') {
-            environment{
-                CREDS = credentials('Ubuntu')
-            }
             steps{ 
+            sshagent(credentials: ['Ubuntu']) {
                 script{
                     try{
-                        sh 'ssh -t -t -i $CREDS ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
-                        sh 'echo hello'
+                        sh 'ssh ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
                     }catch(error){
                             }
+                    }
                 }
             }
         }
