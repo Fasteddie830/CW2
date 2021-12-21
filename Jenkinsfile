@@ -43,7 +43,8 @@ pipeline {
             {
             script{
                 try{
-                    sh 'minikube ssh'
+                    sh 'scp -r -o StrictHostKeyChecking=no ubuntu@192.168.49.2
+'
                     sh 'echo hello'
                 }catch(error){
                         }
@@ -53,3 +54,4 @@ pipeline {
         }
     }
 }
+
