@@ -43,7 +43,8 @@ pipeline {
             {
             script{
                 try{
-                    sh 'ssh ubuntu@192.168.49.2'
+                    sh 'minikube ssh'
+                    sh 'echo hello'
                 }catch(error){
                         }
                 }
