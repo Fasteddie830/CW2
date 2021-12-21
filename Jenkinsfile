@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment{
-        CREDS = credentials('Ubuntu')
-    }
     stages{
         stage('Clone repository') {
             steps{
@@ -41,6 +38,9 @@ pipeline {
             }
         }
         stage('Deploy to K8s') {
+            environment{
+                CREDS = credentials('Ubuntu')
+            }
             steps{ 
                 script{
                     try{
