@@ -39,11 +39,10 @@ pipeline {
         }
         stage('Deploy to K8s') {
             steps{
-            sshagent(['k8s-jenkins'])
             {
             script{
                 try{
-                    sh 'scp -r -o StrictHostKeyChecking=no ubuntu@192.168.49.2'
+                    sh 'ssh ubuntu@100.26.35.33'
                     sh 'echo hello'
                 }catch(error){
                         }
@@ -53,4 +52,3 @@ pipeline {
         }
     }
 }
-
