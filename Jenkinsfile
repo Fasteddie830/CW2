@@ -42,7 +42,7 @@ pipeline {
             sshagent(credentials: ['Ubuntu']) {
                 script{
                     try{
-                        sh ' ssh ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com <<< yes ls'
+                        sh 'ssh ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com ls'
                         /*sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'*/
                         /*sh 'ssh-keyscan -H ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com >> ~/.ssh/known_hosts'*/
                         /*sh 'ssh -t -t ec2-100-26-35-33.compute-1.amazonaws.com'*/
@@ -54,3 +54,5 @@ pipeline {
         }
     }
 }
+
+
