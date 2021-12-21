@@ -10,9 +10,11 @@ pipeline {
         stage('Build image') {
             /* The building of Ro… The coursework 2 image */
             steps{
-                sh 'docker build https://hub.docker.com/repository/docker/fasteddie830/coursework2'
+                script{
+                
+                app = docker.build("fasteddie830/coursework2")
+                }
             }
-           
         }
         stage('Test image') {
           /* * Testing */
