@@ -43,7 +43,7 @@ pipeline {
             {
             script{
                 try{
-                    sh 'ssh ubuntu@192.168.49.2 echo "hello"'
+                    sh 'ssh ubuntu@192.168.49.2'
                 }catch(error){
                         }
                 }
