@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment{
+        CREDS = credentials('Ubuntu')
+    }
     stages{
         stage('Clone repository') {
             steps{
@@ -38,11 +41,10 @@ pipeline {
             }
         }
         stage('Deploy to K8s') {
-            steps{
-            sshagent (credentials: ['Ubuntu']) 
+            steps{ 
                 script{
                     try{
-                        sh 'ssh -t -t StrictHostKeyChecking=no ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
+                        sh 'ssh -t -t -i $CREDS StrictHostKeyChecking=no ubuntu@ec2-100-26-35-33.compute-1.amazonaws.com'
                         sh 'echo hello'
                     }catch(error){
                             }
