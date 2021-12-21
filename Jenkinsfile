@@ -42,7 +42,7 @@ pipeline {
             sshagent(credentials: ['Ubuntu']) {
                 script{
                     try{
-                        sh 'ssh-keyscan -t rsa ubuntu@100.26.35.33'
+                        sh 'ssh-keyscan -Ht rsa [ubuntu],[100.26.35.33] >> known_hosts'
                         sh 'ssh-keyscan -H ubuntu@100.26.35.33 >> ~/.ssh/known_hosts'
                         sh 'ssh ubuntu@100.26.35.33 ls'
                         /*sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'*/
