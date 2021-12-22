@@ -42,7 +42,8 @@ pipeline {
                 script{
                     try{
                         sh 'ssh-keyscan -H 54.88.194.71 >> ~/.ssh/known_hosts'
-                        sh 'ssh ubuntu@54.88.194.71 kubectl set image deployments/coursework2 coursework2=fasteddie830/coursework2:latest && CW2/multiple_users.sh'
+                        sh 'ssh ubuntu@54.88.194.71 kubectl set image deployments/coursework2 coursework2=fasteddie830/coursework2:latest'
+                        sh 'ssh ubuntu@54.88.194.71 ~/CW2/multiple_users.sh'
                     }catch(error){
                             }
                     }
