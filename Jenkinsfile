@@ -42,12 +42,8 @@ pipeline {
             sshagent(credentials: ['Ubuntu']) {
                 script{
                     try{
-                        /*sh 'ssh-keyscan -Ht rsa [ubuntu],[100.26.35.33] >> known_hosts'*/
-                        sh 'ssh-keyscan -H 100.26.35.33 >> ~/.ssh/known_hosts'
-                        sh 'ssh ubuntu@100.26.35.33 kubectl set image deployments/coursework2 coursework2=fasteddie830/coursework2:latest'
-                        /*sh 'scp -r -o StrictHostKeyChecking=no node-deployment.yaml ubuntu@172.17.0.2:/path'*/
-                        
-                        /*sh 'ssh -t -t ec2-100-26-35-33.compute-1.amazonaws.com'*/
+                        sh 'ssh-keyscan -H 54.88.194.71 >> ~/.ssh/known_hosts'
+                        sh 'ssh ubuntu@54.88.194.71 kubectl set image deployments/coursework2 coursework2=fasteddie830/coursework2:latest'     
                     }catch(error){
                             }
                     }
